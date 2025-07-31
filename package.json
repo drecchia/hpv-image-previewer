@@ -1,6 +1,6 @@
 {
     "name": "hpv-image-previewer",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "author": "Danilo T Recchia",
     "main": "dist/js/all.min.js",
     "license": "CC-BY-NC-4.0",
@@ -26,6 +26,8 @@
         "gulp-autoprefixer": "^8.0.0",
         "gulp-clean-css": "^4.3.0",
         "gulp-concat": "^2.6.1",
-        "gulp-minify": "^3.1.0"
+        "gulp-postcss": "^10.0.0",
+        "gulp-uglify": "^3.0.2",
+        "postcss-nested": "^7.0.2"
     }
 }

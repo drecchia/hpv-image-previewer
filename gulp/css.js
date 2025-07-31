@@ -3,6 +3,8 @@ const { src, dest, watch, series } = require('gulp');
 const autoprefixer = require('gulp-autoprefixer');
 const cleancss = require('gulp-clean-css');
 const concat = require('gulp-concat');
+const postcss = require('gulp-postcss');
+const nested = require('postcss-nested');
 
 /** Run all scripts. */
 exports.all = (cb) => {
@@ -19,6 +21,7 @@ const dist = {
 /** Run all scripts. */
 const AllInOne = (cb, input, output) => {
     return src(dist.files)
+        .pipe(postcss([nested()]))
         .pipe(autoprefixer())
         .pipe(cleancss())
         .pipe(concat('all.css'))
