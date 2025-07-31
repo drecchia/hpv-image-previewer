@@ -3,6 +3,10 @@
     "version": "1.0.1",
     "author": "Danilo T Recchia",
     "main": "dist/js/all.min.js",
+    "files": [
+        "dist/js/all.min.js",
+        "dist/css/all.css"
+    ],
     "license": "CC-BY-NC-4.0",
     "repository": {
         "type": "git",
