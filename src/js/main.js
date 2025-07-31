@@ -132,7 +132,7 @@ class HpvImagePreviewer {
 			}).join('');
 		
 		this.container.innerHTML = `
-			<div class="image-popover-overlay visible">
+			<div class="hpv-image-previewer image-popover-overlay visible">
 				<div class="popover-backdrop"></div>
 				${this.galleryMode ? this.renderGalleryNavigation() : ''}
 				<div class="popover-content">

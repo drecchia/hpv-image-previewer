@@ -1,7 +1,5 @@
-/* HpvImagePreviewer Component Styles */
-
 /* Standalone HpvImagePreviewer overlay styles */
-.image-popover-overlay {
+.hpv-image-previewer {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -16,12 +14,12 @@
 	transition: all 0.3s ease;
 }
 
-.image-popover-overlay.visible {
+.hpv-image-previewer.visible {
 	opacity: 1;
 	visibility: visible;
 }
 
-.image-popover-overlay .popover-backdrop {
+.hpv-image-previewer .popover-backdrop {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -32,7 +30,7 @@
 	cursor: pointer;
 }
 
-.image-popover-overlay .popover-content {
+.hpv-image-previewer .popover-content {
 	position: relative;
 	z-index: 1001;
 	background: white;
@@ -49,11 +47,11 @@
 	height: fit-content;
 }
 
-.image-popover-overlay.visible .popover-content {
+.hpv-image-previewer.visible .popover-content {
 	transform: scale(1);
 }
 
-.image-popover-overlay .popover-image {
+.hpv-image-previewer .popover-image {
 	position: relative;
 	overflow: hidden;
 	background: #f8f9fa;
@@ -65,7 +63,7 @@
 	/* Dynamic sizing - will be set by JavaScript based on image dimensions */
 }
 
-.image-popover-overlay .popover-image img {
+.hpv-image-previewer .popover-image img {
 	max-width: 100%;
 	max-height: 100%;
 	width: auto;
@@ -77,7 +75,7 @@
 	transition: transform 0.1s ease-out;
 }
 
-.image-popover-overlay .zoom-controls {
+.hpv-image-previewer .zoom-controls {
 	position: absolute;
 	bottom: 16px;
 	left: 50%;
@@ -89,7 +87,7 @@
 	padding: 8px;
 }
 
-.image-popover-overlay .zoom-btn {
+.hpv-image-previewer .zoom-btn {
 	background: rgba(255, 255, 255, 0.9);
 	border: none;
 	border-radius: 50%;
@@ -106,20 +104,20 @@
 	user-select: none;
 }
 
-.image-popover-overlay .zoom-btn:hover {
+.hpv-image-previewer .zoom-btn:hover {
 	background: white;
 	transform: scale(1.1);
 }
 
-.image-popover-overlay .zoom-btn:active {
+.hpv-image-previewer .zoom-btn:active {
 	transform: scale(0.95);
 }
 
-.image-popover-overlay .zoom-reset {
+.hpv-image-previewer .zoom-reset {
 	font-size: 12px;
 }
 
-.image-popover-overlay .popover-actions {
+.hpv-image-previewer .popover-actions {
 	padding: 20px;
 	display: flex;
 	gap: 12px;
@@ -127,7 +125,7 @@
 	background: #f8f9fa;
 }
 
-.image-popover-overlay .overlay-button {
+.hpv-image-previewer .overlay-button {
 	padding: 10px 24px;
 	border: none;
 	border-radius: 6px;
@@ -140,27 +138,27 @@
 	color: white;
 }
 
-.image-popover-overlay .overlay-button:hover {
+.hpv-image-previewer .overlay-button:hover {
 	transform: translateY(-1px);
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.image-popover-overlay .overlay-button:active {
+.hpv-image-previewer .overlay-button:active {
 	transform: translateY(0);
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.image-popover-overlay .close-btn {
+.hpv-image-previewer .close-btn {
 	background: #6c757d;
 	color: white;
 }
 
-.image-popover-overlay .close-btn:hover {
+.hpv-image-previewer .close-btn:hover {
 	background: #545b62;
 }
 
 /* Gallery Navigation Styles */
-.image-popover-overlay .gallery-navigation {
+.hpv-image-previewer .gallery-navigation {
 	position: fixed;
 	top: 50%;
 	left: 0;
@@ -170,7 +168,7 @@
 	pointer-events: none;
 }
 
-.image-popover-overlay .gallery-nav-btn {
+.hpv-image-previewer .gallery-nav-btn {
 	position: absolute;
 	top: 0;
 	width: 48px;
@@ -189,94 +187,94 @@
 	user-select: none;
 }
 
-.image-popover-overlay .gallery-nav-btn:hover {
+.hpv-image-previewer .gallery-nav-btn:hover {
 	background: white;
 	transform: scale(1.1);
 	box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 }
 
-.image-popover-overlay .gallery-nav-btn:active {
+.hpv-image-previewer .gallery-nav-btn:active {
 	transform: scale(0.95);
 }
 
-.image-popover-overlay .gallery-prev {
+.hpv-image-previewer .gallery-prev {
 	left: 20px;
 }
 
-.image-popover-overlay .gallery-next {
+.hpv-image-previewer .gallery-next {
 	right: 20px;
 }
 
-.image-popover-overlay .gallery-nav-btn svg {
+.hpv-image-previewer .gallery-nav-btn svg {
 	width: 24px;
 	height: 24px;
 	pointer-events: none;
 }
 
-.image-popover-overlay .gallery-nav-btn svg path {
+.hpv-image-previewer .gallery-nav-btn svg path {
 	pointer-events: none;
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-	.image-popover-overlay .popover-content {
+	.hpv-image-previewer .popover-content {
 		max-width: 95vw;
 		max-height: 90vh;
 		margin: 10px;
 	}
 	
-	.image-popover-overlay .popover-actions {
+	.hpv-image-previewer .popover-actions {
 		padding: 16px;
 		gap: 8px;
 	}
 	
-	.image-popover-overlay .overlay-button {
+	.hpv-image-previewer .overlay-button {
 		padding: 8px 16px;
 		font-size: 13px;
 		min-width: 70px;
 	}
 	
-	.image-popover-overlay .zoom-controls {
+	.hpv-image-previewer .zoom-controls {
 		bottom: 12px;
 		padding: 6px;
 		gap: 6px;
 	}
 	
-	.image-popover-overlay .zoom-btn {
+	.hpv-image-previewer .zoom-btn {
 		width: 28px;
 		height: 28px;
 		font-size: 14px;
 	}
 	
 	/* Mobile gallery navigation */
-	.image-popover-overlay .gallery-nav-btn {
+	.hpv-image-previewer .gallery-nav-btn {
 		width: 40px;
 		height: 40px;
 	}
 	
-	.image-popover-overlay .gallery-prev {
+	.hpv-image-previewer .gallery-prev {
 		left: 10px;
 	}
 	
-	.image-popover-overlay .gallery-next {
+	.hpv-image-previewer .gallery-next {
 		right: 10px;
 	}
 	
-	.image-popover-overlay .gallery-nav-btn svg {
+	.hpv-image-previewer .gallery-nav-btn svg {
 		width: 20px;
 		height: 20px;
 	}
 }
 
 @media (max-width: 480px) {
-	.image-popover-overlay .popover-content {
+	.hpv-image-previewer .popover-content {
 		max-width: 98vw;
 		max-height: 85vh;
 		margin: 5px;
 		border-radius: 8px;
 	}
 	
-	.image-popover-overlay .popover-actions {
+	.hpv-image-previewer .popover-actions {
 		padding: 12px;
 		flex-wrap: wrap;
 	}
