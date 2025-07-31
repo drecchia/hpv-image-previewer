@@ -1,0 +1,31 @@
+{
+    "name": "hpv-image-previewer",
+    "version": "1.0.0",
+    "author": "Danilo T Recchia",
+    "main": "dist/js/all.min.js",
+    "license": "CC-BY-NC-4.0",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/drecchia/hpv-image-previewer.git"
+    },
+    "description": "Hyper Parametrizable Vanilla image previewer, the best independent image preview tool.",
+    "keywords": [
+        "image",
+        "preview",
+        "gallery",
+        "vanilla",
+        "vanillajs",
+        "remote image",
+        "base64"
+    ],
+    "scripts": {
+        "build": "gulp default"
+    },
+    "devDependencies": {
+        "gulp": "^4.0.2",
+        "gulp-autoprefixer": "^8.0.0",
+        "gulp-clean-css": "^4.3.0",
+        "gulp-concat": "^2.6.1",
+        "gulp-minify": "^3.1.0"
+    }
+}

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HpvImagePreviewer Standalone Example</title>
+    <link rel="stylesheet" href="../src/css/image-previewer.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        .demo-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        .demo-images {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .demo-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        .demo-image:hover {
+            transform: scale(1.05);
+        }
+        .demo-controls {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        .btn-primary {
+            background: #007bff;
+            color: white;
+        }
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <h1>HpvImagePreviewer Standalone Demo</h1>
+        <p>Click on any image below to preview it using the standalone HpvImagePreviewer component.</p>
+        
+        <div class="demo-images" id="demo-images">
+            <!-- Images will be populated by JavaScript -->
+        </div>
+        
+        <div class="demo-controls">
+            <button class="btn-primary" onclick="toggleReadonly()">Toggle Readonly</button>
+            <button class="btn-secondary" onclick="showCustomImage()">Show Custom Image</button>
+            <button class="btn-secondary" onclick="addCustomButton()">Add Custom Button</button>
+        </div>
+        
+        <div style="margin-top: 20px;">
+            <h3>Current Settings:</h3>
+            <p>Readonly: <span id="readonly-status">false</span></p>
+            <p>Custom Buttons: <span id="button-count">2</span></p>
+            <p>Events logged in console</p>
+        </div>
+    </div>
+
+    <script src="../src/js/image-previewer.js"></script>
+    <script>
+        // Sample images for demo
+        const sampleImages = [
+            {
+                url: 'https://picsum.photos/800/600?random=1',
+                alt: 'Sample Image 1'
+            },
+            {
+                url: 'https://picsum.photos/800/600?random=2',
+                alt: 'Sample Image 2'
+            },
+            {
+                url: 'https://picsum.photos/800/600?random=3',
+                alt: 'Sample Image 3'
+            },
+            {
+                url: 'https://picsum.photos/800/600?random=4',
+                alt: 'Sample Image 4'
+            }
+        ];
+
+        // Create HpvImagePreviewer instance
+        const imagePreviewer = new HpvImagePreviewer({
+            closeButtonText: 'Close',
+            isReadOnly: false,
+            buttons: [
+                {
+                    id: 'view',
+                    label: 'View',
+                    title: 'View full size image',
+                    icon: '',
+                    visibleReadOnly: true,
+                    customClasses: ['btn-primary', 'view-btn'],
+                    clickHandler: (image, previewerInstance) => {
+                        console.log('🔍 View clicked for:', image.alt);
+                        window.open(image.url, '_blank');
+                    }
+                },
+                {
+                    id: 'delete',
+                    label: 'Delete',
+                    title: 'Delete this image',
+                    icon: '',
+                    visibleReadOnly: false,
+                    customClasses: ['btn-danger', 'delete-btn'],
+                    clickHandler: (image, previewerInstance) => {
+                        console.log('🗑️ Remove clicked for:', image.alt);
+                        if (confirm(`Delete ${image.alt}?`)) {
+                            alert(`Delete action for: ${image.alt}`);
+                            previewerInstance.hide();
+                        }
+                    }
+                }
+            ],
+            onClose: (image) => {
+                console.log('❌ Close clicked for:', image.alt);
+            }
+        });
+
+        // Listen to events
+        imagePreviewer.container.addEventListener('hpvImagePreviewer:customButtonClick', (e) => {
+            console.log('📢 Event - Custom Button Click:', e.detail.buttonId, e.detail.image.alt);
+        });
+
+        imagePreviewer.container.addEventListener('hpvImagePreviewer:close', (e) => {
+            console.log('📢 Event - Close:', e.detail.image.alt);
+        });
+
+        // Populate demo images
+        function populateImages() {
+            const container = document.getElementById('demo-images');
+            container.innerHTML = sampleImages.map((image, index) => `
+                <img 
+                    src="${image.url}" 
+                    alt="${image.alt}" 
+                    class="demo-image"
+                    onclick="showImage(${index})"
+                >
+            `).join('');
+        }
+
+        // Show image in previewer
+        function showImage(index) {
+            const image = sampleImages[index];
+            console.log('👆 Showing image:', image.alt);
+            imagePreviewer.show(image);
+        }
+
+        // Demo functions
+        function toggleReadonly() {
+            const newReadonly = imagePreviewer.toggleReadOnly();
+            document.getElementById('readonly-status').textContent = newReadonly;
+            console.log('🔒 Readonly toggled to:', newReadonly);
+        }
+
+        function showCustomImage() {
+            const customImage = {
+                url: 'https://picsum.photos/800/600?random=' + Math.floor(Math.random() * 100),
+                alt: 'Custom Random Image'
+            };
+            console.log('🎲 Showing custom image');
+            imagePreviewer.show(customImage);
+        }
+
+        function addCustomButton() {
+            const currentButtons = imagePreviewer.options.buttons;
+            const newButton = {
+                id: 'download',
+                label: 'Download',
+                title: 'Download this image',
+                icon: '',
+                visibleReadOnly: true,
+                customClasses: ['btn-success'],
+                clickHandler: (image, previewerInstance) => {
+                    console.log('📥 Download clicked for:', image.alt);
+                    // Create a temporary link to download the image
+                    const a = document.createElement('a');
+                    a.href = image.url;
+                    a.download = image.alt || 'image';
+                    a.click();
+                }
+            };
+            
+            imagePreviewer.updateOptions({
+                buttons: [...currentButtons, newButton]
+            });
+            
+            document.getElementById('button-count').textContent = imagePreviewer.options.buttons.length;
+            console.log('➕ Added download button');
+        }
+
+        // Initialize demo
+        populateImages();
+        console.log('🚀 HpvImagePreviewer standalone demo initialized');
+        console.log('Available methods:', Object.getOwnPropertyNames(HpvImagePreviewer.prototype));
+    </script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HpvImagePreviewer Demo</title>
+  <link rel="stylesheet" href="./src/css/main.css">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f5f5f5;
+      padding: 24px;
+    }
+    .demo-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    .demo-images {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+    .demo-image {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .demo-image:hover {
+      transform: scale(1.05);
+    }
+    .demo-controls {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+    .btn-primary { background: #007bff; color: white; }
+    .btn-secondary { background: #6c757d; color: white; }
+  </style>
+</head>
+<body>
+  <div class="demo-container">
+    <h1>HpvImagePreviewer Demo</h1>
+    <p>Click any image to preview it in a modal overlay.</p>
+    <div class="demo-images" id="demo-images"></div>
+    <div class="demo-controls">
+      <button class="btn-primary" onclick="toggleReadonly()">Toggle Readonly</button>
+    </div>
+    <div style="margin-top: 20px;">
+      <h3>Status:</h3>
+      <p>Readonly: <span id="readonly-status">false</span></p>
+    </div>
+  </div>
+  <script src="./src/js/main.js"></script>
+  <script>
+    // Sample images
+    const sampleImages = [
+      { url: 'https://picsum.photos/800/600?random=1', alt: 'Sample Image 1' },
+      { url: 'https://picsum.photos/800/600?random=2', alt: 'Sample Image 2' },
+      { url: 'https://picsum.photos/800/600?random=3', alt: 'Sample Image 3' },
+      { url: 'https://picsum.photos/800/600?random=4', alt: 'Sample Image 4' }
+    ];
+
+    // Instantiate previewer
+    const previewer = new HpvImagePreviewer({
+      closeButtonText: 'Close',
+      isReadOnly: false,
+      buttons: [
+        {
+          id: 'view',
+          label: 'View',
+          title: 'View full size image',
+          customClasses: ['btn-primary'],
+          visibleReadOnly: true,
+          clickHandler: (image) => window.open(image.url, '_blank')
+        }
+      ]
+    });
+
+    // Populate images
+    function populateImages() {
+      const container = document.getElementById('demo-images');
+      container.innerHTML = sampleImages.map((img, i) =>
+        `<img src="${img.url}" alt="${img.alt}" class="demo-image" onclick="showImage(${i})">`
+      ).join('');
+    }
+
+    // Show image in previewer
+    window.showImage = function(index) {
+      previewer.show(sampleImages[index]);
+    };
+
+    // Toggle readonly mode
+    window.toggleReadonly = function() {
+      const newVal = previewer.toggleReadOnly();
+      document.getElementById('readonly-status').textContent = newVal;
+    };
+
+    populateImages();
+  </script>
+</body>
+</html>

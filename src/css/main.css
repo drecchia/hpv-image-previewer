@@ -1,0 +1,283 @@
+/* HpvImagePreviewer Component Styles */
+
+/* Standalone HpvImagePreviewer overlay styles */
+.image-popover-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 1000;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	opacity: 0;
+	visibility: hidden;
+	transition: all 0.3s ease;
+}
+
+.image-popover-overlay.visible {
+	opacity: 1;
+	visibility: visible;
+}
+
+.image-popover-overlay .popover-backdrop {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.8);
+	backdrop-filter: blur(4px);
+	cursor: pointer;
+}
+
+.image-popover-overlay .popover-content {
+	position: relative;
+	z-index: 1001;
+	background: white;
+	border-radius: 12px;
+	box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+	max-width: min(95vw, 1400px);
+	max-height: 95vh;
+	overflow: hidden;
+	transform: scale(0.9);
+	transition: transform 0.3s ease;
+	display: flex;
+	flex-direction: column;
+	width: fit-content;
+	height: fit-content;
+}
+
+.image-popover-overlay.visible .popover-content {
+	transform: scale(1);
+}
+
+.image-popover-overlay .popover-image {
+	position: relative;
+	overflow: hidden;
+	background: #f8f9fa;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 200px;
+	width: 100%;
+	/* Dynamic sizing - will be set by JavaScript based on image dimensions */
+}
+
+.image-popover-overlay .popover-image img {
+	max-width: 100%;
+	max-height: 100%;
+	width: auto;
+	height: auto;
+	object-fit: contain;
+	display: block;
+	cursor: grab;
+	user-select: none;
+	transition: transform 0.1s ease-out;
+}
+
+.image-popover-overlay .zoom-controls {
+	position: absolute;
+	bottom: 16px;
+	left: 50%;
+	transform: translateX(-50%);
+	display: flex;
+	gap: 8px;
+	background: rgba(0, 0, 0, 0.7);
+	border-radius: 20px;
+	padding: 8px;
+}
+
+.image-popover-overlay .zoom-btn {
+	background: rgba(255, 255, 255, 0.9);
+	border: none;
+	border-radius: 50%;
+	width: 32px;
+	height: 32px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	font-size: 16px;
+	font-weight: bold;
+	color: #333;
+	transition: all 0.2s ease;
+	user-select: none;
+}
+
+.image-popover-overlay .zoom-btn:hover {
+	background: white;
+	transform: scale(1.1);
+}
+
+.image-popover-overlay .zoom-btn:active {
+	transform: scale(0.95);
+}
+
+.image-popover-overlay .zoom-reset {
+	font-size: 12px;
+}
+
+.image-popover-overlay .popover-actions {
+	padding: 20px;
+	display: flex;
+	gap: 12px;
+	justify-content: center;
+	background: #f8f9fa;
+}
+
+.image-popover-overlay .overlay-button {
+	padding: 10px 24px;
+	border: none;
+	border-radius: 6px;
+	font-weight: 600;
+	font-size: 14px;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	min-width: 80px;
+	background: #6c757d;
+	color: white;
+}
+
+.image-popover-overlay .overlay-button:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.image-popover-overlay .overlay-button:active {
+	transform: translateY(0);
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.image-popover-overlay .close-btn {
+	background: #6c757d;
+	color: white;
+}
+
+.image-popover-overlay .close-btn:hover {
+	background: #545b62;
+}
+
+/* Gallery Navigation Styles */
+.image-popover-overlay .gallery-navigation {
+	position: fixed;
+	top: 50%;
+	left: 0;
+	right: 0;
+	transform: translateY(-50%);
+	z-index: 1002;
+	pointer-events: none;
+}
+
+.image-popover-overlay .gallery-nav-btn {
+	position: absolute;
+	top: 0;
+	width: 48px;
+	height: 48px;
+	border: none;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, 0.9);
+	color: #333;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	pointer-events: auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+	user-select: none;
+}
+
+.image-popover-overlay .gallery-nav-btn:hover {
+	background: white;
+	transform: scale(1.1);
+	box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.image-popover-overlay .gallery-nav-btn:active {
+	transform: scale(0.95);
+}
+
+.image-popover-overlay .gallery-prev {
+	left: 20px;
+}
+
+.image-popover-overlay .gallery-next {
+	right: 20px;
+}
+
+.image-popover-overlay .gallery-nav-btn svg {
+	width: 24px;
+	height: 24px;
+	pointer-events: none;
+}
+
+.image-popover-overlay .gallery-nav-btn svg path {
+	pointer-events: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+	.image-popover-overlay .popover-content {
+		max-width: 95vw;
+		max-height: 90vh;
+		margin: 10px;
+	}
+	
+	.image-popover-overlay .popover-actions {
+		padding: 16px;
+		gap: 8px;
+	}
+	
+	.image-popover-overlay .overlay-button {
+		padding: 8px 16px;
+		font-size: 13px;
+		min-width: 70px;
+	}
+	
+	.image-popover-overlay .zoom-controls {
+		bottom: 12px;
+		padding: 6px;
+		gap: 6px;
+	}
+	
+	.image-popover-overlay .zoom-btn {
+		width: 28px;
+		height: 28px;
+		font-size: 14px;
+	}
+	
+	/* Mobile gallery navigation */
+	.image-popover-overlay .gallery-nav-btn {
+		width: 40px;
+		height: 40px;
+	}
+	
+	.image-popover-overlay .gallery-prev {
+		left: 10px;
+	}
+	
+	.image-popover-overlay .gallery-next {
+		right: 10px;
+	}
+	
+	.image-popover-overlay .gallery-nav-btn svg {
+		width: 20px;
+		height: 20px;
+	}
+}
+
+@media (max-width: 480px) {
+	.image-popover-overlay .popover-content {
+		max-width: 98vw;
+		max-height: 85vh;
+		margin: 5px;
+		border-radius: 8px;
+	}
+	
+	.image-popover-overlay .popover-actions {
+		padding: 12px;
+		flex-wrap: wrap;
+	}
+}
