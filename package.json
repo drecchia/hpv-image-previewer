@@ -1,6 +1,6 @@
 {
     "name": "hpv-image-previewer",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "author": "Danilo T Recchia",
     "main": "dist/js/all.min.js",
     "files": [
